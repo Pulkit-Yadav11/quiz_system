@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Pulkit Yadav",
+    "email": "random@gmail.com",
+    "topic": "all",
+    "score": 0,
+    "total": 7,
+    "accuracy": 0,
+    "time": 11,
+    "date": "26/10/2025, 11:10:01 pm"
+  },
+  {
+    "name": "idk_someone",
+    "email": "123@gmail.com",
+    "topic": "all",
+    "score": 2,
+    "total": 10,
+    "accuracy": 20,
+    "time": 28,
+    "date": "26/10/2025, 11:43:38 pm"
+  },
+  {
+    "name": "idk_someone",
+    "email": "123@gmail.com",
+    "topic": "all",
+    "score": 4,
+    "total": 10,
+    "accuracy": 40,
+    "time": 26,
+    "date": "26/10/2025, 11:57:54 pm"
+  },
+  {
+    "name": "idk_someone",
+    "email": "123@gmail.com",
+    "topic": "recursion",
+    "score": 0,
+    "total": 10,
+    "accuracy": 0,
+    "time": 154,
+    "date": "27/10/2025, 12:01:02 am"
+  },
+  {
+    "name": "random_rollno",
+    "email": "tcet@tcet.in",
+    "topic": "graphs",
+    "score": 6,
+    "total": 10,
+    "accuracy": 60,
+    "time": 20,
+    "date": "27/10/2025, 12:03:22 am"
+  },
+  {
+    "name": "Pulkit Yadav",
+    "email": "random@gmail.com",
+    "topic": "stack",
+    "score": 6,
+    "total": 10,
+    "accuracy": 60,
+    "time": 19,
+    "date": "27/10/2025, 12:35:21 am"
+  }
+]

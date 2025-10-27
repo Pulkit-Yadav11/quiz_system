@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DSA Quiz Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Primary">
+      <h2>DSA Quiz</h2>
+      <nav>
+        <ul>
+          <li><button class="nav-item active" data-section="home" aria-current="page">Home</button></li>
+          <li><button class="nav-item" data-section="records">Previous Records</button></li>
+          <li><button class="nav-item" data-section="leaderboard">Leaderboard</button></li>
+        </ul>
+      </nav>
+
+      <!-- Dark mode toggle -->
+      <div style="margin-top: 20px;">
+        <button id="darkModeToggle" class="btn btn-secondary" aria-pressed="false">☀️ Light Mode</button>
+      </div>
+
+      <!-- User info in sidebar (if logged in) -->
+      <div id="sidebarUserInfo" class="sidebar-user-info hidden">
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #fff; opacity: 0.8;">
+          <strong>Logged in as:</strong><br>
+          <span id="sidebarUserName">-</span>
+        </p>
+        <button id="logoutBtn" class="btn btn-secondary" style="margin-top: 12px; width: 100%;">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main" class="main-content">
+      <!-- Home Section -->
+      <section id="home" class="section active-section" tabindex="-1" aria-labelledby="home-title">
+        <h1 id="home-title" class="page-title">Data Structures & Algorithms Quiz Platform</h1>
+
+        <!-- Welcome Dashboard -->
+        <div class="welcome-dashboard">
+          <!-- User Authentication Card -->
+          <div id="authCard" class="card auth-card">
+            <h3>Welcome! Please log in to start</h3>
+            <div class="input-col">
+              <input id="quickName" type="text" placeholder="Your name" />
+              <input id="quickEmail" type="email" placeholder="Your email" />
+              <input id="quickPassword" type="password" placeholder="Password (for returning users)" />
+            </div>
+            <div class="btn-row" style="margin-top: 16px;">
+              <button id="quickSignupBtn" class="btn">Sign Up</button>
+              <button id="quickLoginBtn" class="btn btn-secondary">Log In</button>
+            </div>
+            <p id="quickAuthMsg" style="margin-top: 8px; color: var(--muted); font-size: 0.9rem;"></p>
+          </div>
+
+          <!-- Dashboard Stats (shown after login) -->
+          <div id="dashboardStats" class="dashboard-stats hidden">
+            <div class="card stat-card">
+              <div class="stat-icon">👤</div>
+              <div class="stat-info">
+                <h4>Welcome Back!</h4>
+                <p id="dashUserName">-</p>
+                <p id="dashUserEmail" style="font-size: 0.85rem; color: var(--muted);">-</p>
+              </div>
+            </div>
+
+            <div class="card stat-card">
+              <div class="stat-icon">📊</div>
+              <div class="stat-info">
+                <h4>Quizzes Taken</h4>
+                <p class="stat-number" id="totalQuizzes">0</p>
+              </div>
+            </div>
+
+            <div class="card stat-card">
+              <div class="stat-icon">🏆</div>
+              <div class="stat-info">
+                <h4>Best Score</h4>
+                <p class="stat-number" id="bestScore">0%</p>
+              </div>
+            </div>
+
+            <div class="card stat-card">
+              <div class="stat-icon">📈</div>
+              <div class="stat-info">
+                <h4>Avg Accuracy</h4>
+                <p class="stat-number" id="avgAccuracy">0%</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Start Quiz Section -->
+          <div id="quickStartSection" class="quick-start-section hidden">
+            <h2 style="margin-bottom: 20px; text-align: center;">Start a New Quiz</h2>
+            <div class="topic-grid">
+              <button class="topic-card" data-topic="arrays">
+                <span class="topic-icon">📚</span>
+                <h3>Arrays</h3>
+                <p>20 questions</p>
+              </button>
+              <button class="topic-card" data-topic="recursion">
+                <span class="topic-icon">🔄</span>
+                <h3>Recursion</h3>
+                <p>20 questions</p>
+              </button>
+              <button class="topic-card" data-topic="stack">
+                <span class="topic-icon">📚</span>
+                <h3>Stack</h3>
+                <p>20 questions</p>
+              </button>
+              <button class="topic-card" data-topic="queue">
+                <span class="topic-icon">🚶</span>
+                <h3>Queue</h3>
+                <p>20 questions</p>
+              </button>
+              <button class="topic-card" data-topic="trees">
+                <span class="topic-icon">🌳</span>
+                <h3>Trees</h3>
+                <p>20 questions</p>
+              </button>
+              <button class="topic-card" data-topic="graphs">
+                <span class="topic-icon">🕸️</span>
+                <h3>Graphs</h3>
+                <p>20 questions</p>
+              </button>
+              <button class="topic-card" data-topic="all">
+                <span class="topic-icon">🎯</span>
+                <h3>All Topics</h3>
+                <p>Random mix</p>
+              </button>
+            </div>
+          </div>
+
+          <!-- Performance Graph -->
+          <div id="performanceSection" class="chart-container card hidden">
+            <h3 style="text-align: center; margin-bottom: 20px;">Your Performance Over Time</h3>
+            <canvas id="performanceChart" width="800" height="360"></canvas>
+            <p style="text-align: center; margin-top: 16px; font-size: 1.1rem;">Your Percentile: <strong><span id="percentile">0</span>%</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quiz Section -->
+      <section id="quiz" class="section" tabindex="-1" aria-labelledby="quiz-title">
+        <h2 id="quiz-title" class="section-title">Quiz</h2>
+
+        <div class="topbar hidden" role="region" aria-label="Quiz status">
+          <div class="timer">Time: <span id="time">0</span>s</div>
+          <div class="question-number">Q <span id="currentQ">0</span>/<span id="totalQ">0</span></div>
+        </div>
+
+        <div class="question-card card hidden">
+          <h2 id="question">Starting quiz...</h2>
+          <div id="options" class="options"></div>
+        </div>
+
+        <div class="controls hidden">
+          <button id="restartBtn" class="btn btn-secondary">Restart Quiz</button>
+          <button id="backHomeBtn" class="btn">Back to Home</button>
+        </div>
+      </section>
+
+      <!-- Previous Records Section -->
+      <section id="records" class="section" tabindex="-1" aria-labelledby="records-title">
+        <h2 id="records-title" class="section-title">Previous Records</h2>
+        <div class="records-container card">
+          <p id="noRecordsMsg">No records available yet.</p>
+          <div class="table-wrap hidden" id="recordsTableWrap">
+            <table id="recordsTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Quiz Topic</th>
+                  <th>Score</th>
+                  <th>Accuracy</th>
+                  <th>Time Taken (s)</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Leaderboard Section -->
+      <section id="leaderboard" class="section" tabindex="-1" aria-labelledby="leaderboard-title">
+        <h2 id="leaderboard-title" class="section-title">Leaderboard — Top Scorers</h2>
+        <div class="records-container card">
+          <p id="noLeadersMsg">No leaderboard data yet.</p>
+          <div class="table-wrap hidden" id="leaderboardTableWrap">
+            <table id="leaderboardTable">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Score</th>
+                  <th>Accuracy</th>
+                  <th>Topic</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Summary Modal -->
+  <div id="summaryModal" class="card summary-modal hidden" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
+    <h3 id="summaryTitle">Quiz Summary</h3>
+    <div id="summaryContent">
+      <p><strong>Score:</strong> <span id="sumScore">0</span></p>
+      <p><strong>Accuracy:</strong> <span id="sumAccuracy">0</span>%</p>
+      <p><strong>Time:</strong> <span id="sumTime">0</span>s</p>
+      <p><strong>Percentile:</strong> <span id="sumPercentile">0</span>%</p>
+    </div>
+    <div style="margin-top:12px;">
+      <button id="closeSummaryBtn" class="btn">Close</button>
+      <button id="viewRecordsBtn" class="btn btn-secondary">View Records</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
