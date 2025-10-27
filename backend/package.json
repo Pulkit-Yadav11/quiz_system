@@ -1,7 +1,7 @@
 {
   "name": "dsa-quiz-backend",
   "version": "1.0.0",
-  "description": "DSA Quiz Platform Backend API",
+  "description": "DSA Quiz Platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

@@ -1,5 +1,14 @@
+# Node modules
 node_modules/
-data/results.json
-data/users.json
+
+# Environment files (if you add later)
 .env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
 .DS_Store
+Thumbs.db
