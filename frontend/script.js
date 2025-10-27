@@ -1,5 +1,6 @@
 // Configuration
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'https://quiz-system-wvm2.onrender.com';
+
 
 // --- Section & Navigation ---
 const sections = document.querySelectorAll('.section');
